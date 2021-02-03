@@ -22,3 +22,5 @@ pip3 install pyaudio
 ## Running the Dviscord
 
 First run the Server program with your ip as an argument, then the different clients with the server ip. There is only one Server on which you can connect as many clients as you want.
+
+There is an arbitrary recording time limit of 100 seconds. Takes it into account when testing. 
