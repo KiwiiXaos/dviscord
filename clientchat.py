@@ -73,29 +73,7 @@ def ReceiveVoice():
     while socks == server:
         message = socks.recv(2048)
         stream.write(message)
-def audio():
-    # the file name output you want to record into
-    filename = "recorded.wav"
-    # set the chunk size of 1024 samples
-    chunk = 1024
-    # sample format
-    FORMAT = pyaudio.paInt16
-    # mono, change to 2 if you want stereo
-    channels = 1
-    # 44100 samples per second
-    sample_rate = 44100
-    record_seconds = 5
-    # initialize PyAudio object
-    p = pyaudio.PyAudio()
-    # open stream object as input & output
-    stream = p.open(format=FORMAT,
-                    channels=channels,
-                    rate=sample_rate,
-                    input=True,
-                    output=True,
-                    frames_per_buffer=chunk)
-    frames = []
-    print("Recording...")
+
 
 
 server = socket.socket(socket.AF_INET, socket.SOCK_STREAM)
