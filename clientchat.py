@@ -7,6 +7,11 @@ import pyaudio
 import _thread
 
 
+if len(sys.argv) != 2:
+    print("please enter the IP adress!")
+    exit()
+ip = str(sys.argv[1])
+
 def Emmeting():
     # the file name output you want to record into
     filename = "recorded.wav"
@@ -33,7 +38,7 @@ def Emmeting():
     for i in range(int(44100 / chunk * record_seconds)):
         data = stream.read(chunk)
         # if you want to hear your voice while recording
-        # stream.write(data)
+        #stream.write(data)
         frames.append(data)
         # print(data)
         server.send(data)
@@ -44,6 +49,8 @@ def Emmeting():
     stream.close()
     # terminate pyaudio object
     p.terminate()
+    #sys.stdout.write("<You>")
+    #sys.stdout.write(str(data))
     sys.stdout.flush()
 
 
@@ -73,11 +80,11 @@ def ReceiveVoice():
     while socks == server:
         message = socks.recv(2048)
         stream.write(message)
-
+        #print(message)
 
 
 server = socket.socket(socket.AF_INET, socket.SOCK_STREAM)
-IP_address = str("172.21.72.157") #str(sys.argv[1])
+IP_address = str(ip) #str(sys.argv[1])
 Port =  6666 #int(sys.argv[2])
 server.connect((IP_address, Port))
 
@@ -106,7 +113,6 @@ while True:
         channels = 1
         # 44100 samples per second
         sample_rate = 44100
-        record_seconds = 100
         # initialize PyAudio object
         p = pyaudio.PyAudio()
         # open stream object as input & output
@@ -118,11 +124,13 @@ while True:
                         frames_per_buffer=chunk)
         frames = []
         print("Recording...")
+
         _thread.start_new_thread(Emmeting, ())
         _thread.start_new_thread(ReceiveVoice, ())
         while socks == server:
             message = socks.recv(2048)
             stream.write(message)
+            #print(message)
         print("quit")
 
 
