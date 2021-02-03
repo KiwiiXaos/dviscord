@@ -21,4 +21,4 @@ pip3 install pyaudio
 
 ## Running the Dviscord
 
-First run the Server program, then the different clients. There is only one Server on which you can connect as many clients as you want.
+First run the Server program with your ip as an argument, then the different clients with the server ip. There is only one Server on which you can connect as many clients as you want.
